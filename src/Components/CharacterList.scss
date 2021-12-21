@@ -1,0 +1,19 @@
+@import '../_variables';
+
+.character-list {
+	list-style: none;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: center;
+
+	&__item {
+		margin: 0 1.5625rem 1.875rem;
+	}
+
+	&__button {
+		margin: auto;
+		width: 10.625rem;
+	}
+}

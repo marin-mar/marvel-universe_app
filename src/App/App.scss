@@ -1,0 +1,74 @@
+@import '../_variables';
+
+.app {
+  width: 95vw;
+  max-width: 75rem;
+  margin: 0 auto;
+	background-image: url('../Img/bg_right.png');
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-position: right bottom;
+
+	& .row {
+		display: flex;
+		flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+	}
+
+	& .col {
+		display: flex;
+		flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+	}
+
+  & .spinner {
+    width: 6.25rem;
+    height: 6.25rem;
+    margin: auto;
+  }
+
+  & .header {
+    margin: 3.125rem auto;
+  }
+
+  & .banners {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2.8125rem;
+  }
+
+  & .characters {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 2.8125rem auto;
+
+    & > .col {
+      width: 65%;
+    }
+
+    & .character-list {
+      margin: auto;
+      @media (max-width: 600px) {
+        width: 40%;
+        margin: 0;
+      }
+    }
+
+    & .description {
+      width: 35%;
+      min-height: 18.4375rem;
+      @media (max-width: 600px) {
+        width: 60%;
+        margin: 0;
+      }
+    }
+  }
+}

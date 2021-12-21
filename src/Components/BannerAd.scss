@@ -1,0 +1,22 @@
+@import '../_variables';
+
+.banner--ad {
+  width: 100%;
+  min-height: 6.25rem;
+  color: $light;
+  background-color: $bg;
+
+  & .banner__img {
+    min-width: 8.3125rem;
+    max-width: 9.5rem;
+    margin: auto;
+    margin-left: 2.8125rem;
+    margin-right: 1.5625rem;
+  }
+  & .banner__info {
+    margin: auto;
+    margin-top: 1.125rem;
+    margin-left: 3.625rem;
+    margin-right: auto;
+  }
+}

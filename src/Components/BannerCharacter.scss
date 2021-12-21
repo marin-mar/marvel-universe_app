@@ -1,0 +1,32 @@
+@import '../_variables';
+
+.banner--character {
+  background-color: $light;
+
+  & .banner__description {
+    margin-bottom: 0.8125rem;
+    height: 6rem;
+  }
+  & .banner__img-wrapper {
+    width: 50%;
+    
+  }
+  & .banner__img {
+    margin: 1.875rem;
+    margin-right: 0;
+    max-width: 200px;
+    max-height: 200px;
+    display: block;
+    object-fit: contain;
+  }
+  & .banner__info {
+    width: 50%;
+    margin: 1.875rem;
+    @media (max-width: 600px) {
+      width: auto;
+    }
+  }
+  & .banner__name {
+    margin-bottom: 0.8125rem;
+  }
+}

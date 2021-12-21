@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Roboto+Condensed:wght@400;700&display=swap');
+@import './_variables';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-family: 'Roboto Condensed', 'Montserrat', sans-serif;
+  color: $dark;
+  background-color: $light;
+  overflow-x: hidden;
+}

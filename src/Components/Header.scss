@@ -1,0 +1,45 @@
+@import '../_variables';
+
+.header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+  font-size: 1.75rem;
+  color: $dark;
+
+  // &__logo {
+  // }
+
+  // &__menu {
+  // }
+}
+
+.logo {
+  &__main {
+    color: $accent;
+  }
+}
+
+.menu {
+  &__list {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  &__item {
+		&.active {
+			color: $accent;
+		}
+    &:not(:last-child)::after {
+      content: '/';
+      font-weight: 700;
+      font-size: 1.75rem;
+      color: $dark;
+			margin: 0 0.5rem;
+    }
+  }
+}

@@ -1,0 +1,29 @@
+@import '../_variables';
+
+.banner--random {
+  padding: 2.1875rem 2.5rem;
+  color: $light;
+  background-color: $bg;
+  font-size: 1.5rem;
+  position: relative;
+  width: 45vw;
+
+  & .banner__text {
+    margin-bottom: 1rem;
+    line-height: 1.75rem;
+  }
+  & h2.banner__text {
+    margin-bottom: 2.5rem;
+  }
+  & .banner__info {
+    width: 100%;
+    z-index: 2;
+  }
+  & .banner__img {
+    z-index: 1;
+    position: absolute;
+    bottom: 0.5rem;
+    right: -3rem;
+    width: 12.5rem;
+  }
+}
