@@ -3,6 +3,7 @@ import Header from '../Components/Header';
 import Banner from '../Components/Banner';
 import CharacterList from '../Components/CharacterList';
 import CharacterDescription from '../Components/CharacterDescription';
+import ErrorBoundary from '../Components/ErrorBoundary';
 
 import './App.scss';
 
@@ -22,12 +23,18 @@ class App extends Component {
       <div className="app">
         <Header />
         <div className="banners">
-          <Banner bannerCharacter />
+          <ErrorBoundary>
+            <Banner bannerCharacter />
+          </ErrorBoundary>
         </div>
         <div className="characters">
-          <CharacterList onSelectedCharacterId={this.onSelectedCharacterId} />
+          <ErrorBoundary>
+            <CharacterList onSelectedCharacterId={this.onSelectedCharacterId} />
+          </ErrorBoundary>
           <div className="description">
-            <CharacterDescription selectedCharacterId={this.state.selectedCharacterId} />
+            <ErrorBoundary>
+              <CharacterDescription selectedCharacterId={this.state.selectedCharacterId} />
+            </ErrorBoundary>
           </div>
         </div>
       </div>
