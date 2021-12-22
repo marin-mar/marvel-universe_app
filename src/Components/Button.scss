@@ -56,9 +56,8 @@
     }
   }
 
-  &:hover,
-  &:active,
-  &:focus {
+  &:hover {
     color: $dark;
+    transform: translateY(-0.2rem);
   }
 }

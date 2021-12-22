@@ -28,6 +28,7 @@ const CharacterCard = (props) => {
         width={200 + 'px'}
         height={200 + 'px'}
       />
+      <span className="character-card__spacer"></span>
       <h3 className="character-card__title">{name}</h3>
     </div>
   );

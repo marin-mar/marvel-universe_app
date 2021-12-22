@@ -1,45 +1,135 @@
+import { Component } from 'react';
+
 import Button from './Button';
-import characterCardImg from '../Img/character_card.png';
+import MarvelService from '../services/MarvelService';
+import Spinner from './Spinner';
+import ErrorMessage from './ErrorMessage';
+import Skeleton from './Skeleton';
 
 import './CharacterDescription.scss';
 
-const CharacterDescription = (props) => {
+class CharacterDescription extends Component {
+  state = {
+    character: null,
+    loading: false,
+    error: false,
+  };
+
+  marvelService = new MarvelService();
+
+  onError = () => {
+    this.setState({
+      loading: false,
+      error: true,
+    });
+  };
+
+  onCharacterLoading = () => {
+    this.setState({
+      loading: true,
+    });
+  };
+
+  onCharacterLoaded = (character) => {
+    this.setState({
+      character,
+      loading: false,
+    });
+  };
+
+  updateCharacter = () => {
+    const { selectedCharacterId } = this.props;
+    if (!selectedCharacterId) {
+      return;
+    }
+
+    this.onCharacterLoading();
+
+    this.marvelService.getCharacter(selectedCharacterId).then(this.onCharacterLoaded).catch(this.onError);
+  };
+
+  componentDidMount() {
+    this.updateCharacter();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.selectedCharacterId !== prevProps.selectedCharacterId) {
+      this.updateCharacter();
+    }
+  }
+
+  render() {
+    const { character, loading, error } = this.state;
+
+    const skeleton = character || loading || error ? null : <Skeleton />;
+    const errorMessage = error ? <ErrorMessage /> : null;
+    const spinner = loading ? <Spinner /> : null;
+    const content = !(loading || error || !character) ? <CharacterView character={character} /> : null;
+
+    return (
+      <div className="character-description">
+        {skeleton}
+        {errorMessage}
+        {spinner}
+        {content}
+      </div>
+    );
+  }
+}
+
+const CharacterView = ({ character }) => {
+  let { name, description, thumbnail, homepage, wiki, comics } = character;
+  comics = comics.length > 9 ? comics.slice(0, 10) : comics;
+
+  if (!name) {
+    name = 'There is no name yet';
+  }
+
+  if (!description) {
+    description = 'There is no description yet';
+  }
+
+  if (description.length > 200) {
+    description = description.slice(0, 200) + '...';
+  }
+
+  if (!thumbnail) {
+    thumbnail = 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg';
+  }
+
   return (
-    <div className="character-description">
+    <>
       <div className="row">
-        <img
-          className="character-description__img"
-          src={characterCardImg}
-          alt="character-card__img"
-          width={200 + 'px'}
-          height={200 + 'px'}
-        />
+        <img className="character-description__img" src={thumbnail} alt={name} width={200} height={200} />
         <div className="col">
-          <h2 className="character-description__name">LOKI</h2>
+          <h2 className="character-description__name">{name}</h2>
           <div className="character-description__buttons">
-            <Button buttonClasses={'character-description__button button--accent'} buttonName="Homepage" />
-            <Button buttonClasses={'character-description__button'} buttonName="Wiki" />
+            <Button
+              buttonClasses={'character-description__button button--accent'}
+              buttonName="Homepage"
+              buttonUrl={homepage}
+            />
+            <Button buttonClasses={'character-description__button'} buttonName="Wiki" buttonUrl={wiki} />
           </div>
         </div>
       </div>
       <div className="row">
-        <p className="character-description__text">
-          In Norse mythology, Loki is a god or jötunn (or both). Loki is the son of Fárbauti and Laufey, and the brother
-          of Helblindi and Býleistr. By the jötunn Angrboða, Loki is the father of Hel, the wolf Fenrir, and the world
-          serpent Jörmungandr. By Sigyn, Loki is the father of Nari and/or Narfi and with the stallion Svaðilfari as the
-          father, Loki gave birth—in the form of a mare—to the eight-legged horse Sleipnir. In addition, Loki is
-          referred to as the father of Váli in the Prose Edda.
-        </p>
+        <p className="character-description__text">{description}</p>
       </div>
       <div className="col">
         <h3 className="character-description__comics">Comics:</h3>
         <ul className="character-description__comics-list">
-          <li className="character-description__comics-item">All-Winners Squad: Band of Heroes (2011) #3</li>
-          <li className="character-description__comics-item">Alpha Flight (1983) #50</li>
-          <li className="character-description__comics-item">Amazing Spider-Man (1999) #503</li>
+          {comics.length > 0 ? null : 'There is no comics with this character'}
+          {comics.map((item, i) => {
+            return (
+              <li className="character-description__comics-item" key={i}>
+                {item.name}
+              </li>
+            );
+          })}
         </ul>
       </div>
-    </div>
+    </>
   );
 };
 

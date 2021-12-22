@@ -1,14 +1,17 @@
 @import '../_variables';
 
 .character-card {
-	box-shadow: 5px 5px 10px transparentize($dark, 0.75);
-	transition: all 0.2s ease;
-	cursor: pointer;
+  background-color: $bg;
+  box-shadow: 5px 5px 10px transparentize($dark, 0.75);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  overflow: hidden;
 
   &__img {
     width: 12.5rem;
-    height: 12.5rem;
-		object-fit: cover;
+    height: 12.5rem;    
+    object-fit: cover;
+    transition: all 0.5s;
   }
   &__title {
     color: $light;
@@ -16,17 +19,34 @@
     font-weight: 700;
     font-size: 1.375rem;
     line-height: 1.625rem;
-		padding: 1.5rem;
-		min-height: 7.375rem;
-		margin-top: -0.3rem;
-		text-align: center;
+    padding: 1.5rem;
+    min-height: 7.375rem;
+    text-align: center;
+    transition: all 0.7s;
+  }
+  &__spacer {
+    display: block;
+    margin-top: -0.5rem;
+    width: inherit;
+    height: 0.5rem;
+    background-color: $accent;
+    transition: all 0.5s;
   }
 
-	&:active,
-	&:hover,
-	&:focus,
-	&.active {
-		box-shadow: 0px 5px 20px transparentize($accent, 0.50);
-		transform: translateY(-0.5625rem);
-	}
+  &:active,
+  &:hover,
+  &:focus,
+  &.active {
+    box-shadow: 0px 5px 20px transparentize($accent, 0.2);
+
+    .character-card__img {
+      transform: scale(1.1);
+    }
+    .character-card__title {
+      background-color: $accent;
+    }
+    .character-card__spacer {
+      transform: translateY(7rem);
+    }
+  }
 }

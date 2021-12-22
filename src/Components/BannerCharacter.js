@@ -1,10 +1,10 @@
 import { Component } from 'react';
 
-import Button from './Button';
 import MarvelService from '../services/MarvelService';
 import Spinner from './Spinner';
 import ErrorMessage from './ErrorMessage';
 import BannerRandom from './BannerRandom';
+import Button from './Button';
 
 import './BannerCharacter.scss';
 
@@ -33,6 +33,12 @@ class BannerCharacter extends Component {
     });
   };
 
+  onCharacterLoading = () => {
+    this.setState({
+      loading: true,
+    });
+  };
+
   onCharacterLoaded = (character) => {
     this.setState({
       character,
@@ -43,6 +49,7 @@ class BannerCharacter extends Component {
   updateCharacter = () => {
     let charactersId = [];
     let id;
+    this.onCharacterLoading();
     this.marvelService
       .getAllCharacters()
       .then((res) => {
@@ -64,7 +71,7 @@ class BannerCharacter extends Component {
     let { character, loading, error } = this.state;
     const errorMessage = error ? <ErrorMessage /> : null;
     const spinner = loading ? <Spinner /> : null;
-    const content = !(loading || error) ? <ViewCharacter character={character} /> : null;
+    const content = !(loading || error) ? <CharacterView {...character} /> : null;
 
     return (
       <div className="row">
@@ -79,10 +86,9 @@ class BannerCharacter extends Component {
   }
 }
 
-const ViewCharacter = (character) => {
-  let {
-    character: { name, description, thumbnail, homepage, wiki },
-  } = character;
+
+const CharacterView = (character) => {
+  let { name, description, thumbnail, homepage, wiki } = character;
 
   if (!name) {
     name = 'There is no name yet';

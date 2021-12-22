@@ -58,7 +58,12 @@ class CharacterList extends Component {
   renderItems(charactersList) {
     let items = charactersList.map((item) => {
       return (
-        <li className="character-list__item" key={item.id}>
+        <li
+          className="character-list__item"
+          key={item.id}
+          onClick={() => {
+            this.props.onSelectedCharacterId(item.id);
+          }}>
           <CharacterCard name={item.name} thumbnail={item.thumbnail} />
         </li>
       );
