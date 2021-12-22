@@ -4,9 +4,8 @@ import Button from './Button';
 import MarvelService from '../services/MarvelService';
 import Spinner from './Spinner';
 import ErrorMessage from './ErrorMessage';
+import BannerRandom from './BannerRandom';
 
-import bannerRandomImg from '../Img/banner-random.png';
-import './BannerRandom.scss';
 import './BannerCharacter.scss';
 
 class BannerCharacter extends Component {
@@ -113,30 +112,6 @@ const ViewCharacter = (character) => {
         </div>
       </div>
     </>
-  );
-};
-
-const BannerRandom = (props) => {
-  const { updateCharacter } = props;
-  return (
-    <div className="banner banner--random">
-      <div className="banner__info">
-        <h2 className="banner__text">
-          Random character for today!
-          <br />
-          Do you want to get to know him better?
-        </h2>
-        <p className="banner__text">Or choose another one</p>
-        <div className="banner__buttons">
-          <Button
-            buttonClasses={'banner__button button--accent button--dark-bg'}
-            buttonName="Try it"
-            onClick={updateCharacter}
-          />
-        </div>
-      </div>
-      <img className="banner__img" src={bannerRandomImg} alt="hammer and shield" width={202} height={189} />
-    </div>
   );
 };
 

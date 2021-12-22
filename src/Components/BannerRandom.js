@@ -22,13 +22,7 @@ const BannerRandom = (props) => {
           />
         </div>
       </div>
-      <img
-        className="banner__img"
-        src={bannerRandomImg}
-        alt="hammer and shield"
-        width={202 + 'px'}
-        height={189 + 'px'}
-      />
+      <img className="banner__img" src={bannerRandomImg} alt="hammer and shield" width={202} height={189} />
     </div>
   );
 };

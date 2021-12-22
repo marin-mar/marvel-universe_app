@@ -3,6 +3,7 @@
 .character-card {
 	box-shadow: 5px 5px 10px transparentize($dark, 0.75);
 	transition: all 0.2s ease;
+	cursor: pointer;
 
   &__img {
     width: 12.5rem;
