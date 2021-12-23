@@ -56,6 +56,7 @@
 
     & > .col {
       width: 50%;
+      margin-right: auto;
       @media (min-width: 1200px) {
         width: 65%;
       }
@@ -71,6 +72,9 @@
     & .description {
       max-width: 50%;
       min-height: 18.4375rem;
+      // position: fixed;
+      // right: 0;
+      // top: 7.5rem;
       @media (max-width: 600px) {
         margin: 0;
       }

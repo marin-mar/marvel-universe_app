@@ -13,18 +13,35 @@ class CharacterList extends Component {
     charactersList: [],
     loading: true,
     error: false,
+    newItemLoading: false,
+    offset: 3,
+    charactersEnded: false,
   };
   marvelService = new MarvelService();
 
   componentDidMount() {
-    this.loadCharactersList();
+    this.onRequestList();
   }
 
-  onCharactersLoaded = (charactersList) => {
+  onListLoading = () => {
     this.setState({
-      charactersList,
-      loading: false,
+      newItemLoading: true,
     });
+  };
+
+  onCharactersLoaded = (newCharactersList) => {
+    let ended = false;
+    if (newCharactersList.length < this.state.offset) {
+      ended = true;
+    }
+
+    this.setState(({ offset, charactersList }) => ({
+      charactersList: [...charactersList, ...newCharactersList],
+      loading: false,
+      newItemLoading: false,
+      offset: offset + 3,
+      charactersEnded: ended,
+    }));
   };
 
   onError = () => {
@@ -34,29 +51,14 @@ class CharacterList extends Component {
     });
   };
 
-  loadCharactersList() {
-    let tempArr = [];
-    let countItems = 0;
-    this.marvelService
-      .getAllCharacters()
-      .then((res) => {
-        res.forEach((item) => {
-          if (
-            item.thumbnail !== 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' &&
-            countItems < 9
-          ) {
-            tempArr.push(item);
-            countItems += 1;
-          }
-        });
-        return tempArr;
-      })
-      .then(this.onCharactersLoaded)
-      .catch(this.onError);
-  }
+  onRequestList = (offset) => {
+    this.onListLoading();
+
+    this.marvelService.getAllCharacters(offset).then(this.onCharactersLoaded).catch(this.onError);
+  };
 
   renderItems(charactersList) {
-    let items = charactersList.map((item) => {
+    let items = charactersList.slice(0, this.state.offset).map((item) => {
       return (
         <li
           className="character-list__item"
@@ -68,16 +70,11 @@ class CharacterList extends Component {
         </li>
       );
     });
-    return (
-      <>
-        <ul className="character-list">{items}</ul>
-        <Button buttonClasses={'character-list__button button--accent'} buttonName="Load more" />
-      </>
-    );
+    return <ul className="character-list">{items}</ul>;
   }
 
   render() {
-    const { charactersList, loading, error } = this.state;
+    const { charactersList, loading, error, newItemLoading, offset, charactersEnded } = this.state;
     const items = this.renderItems(charactersList);
     const errorMessage = error ? <ErrorMessage /> : null;
     const spinner = loading ? <Spinner /> : null;
@@ -88,6 +85,15 @@ class CharacterList extends Component {
         {errorMessage}
         {spinner}
         {content}
+        {!content ? null : (
+          <Button
+            buttonClasses={'character-list__button button--accent'}
+            buttonName="Load more"
+            disabled={newItemLoading}
+            style={{ display: charactersEnded ? 'none' : 'block' }}
+            onClick={() => this.onRequestList(offset)}
+          />
+        )}
       </div>
     );
   }

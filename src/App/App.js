@@ -25,6 +25,7 @@ class App extends Component {
         <div className="banners">
           <ErrorBoundary>
             <Banner bannerCharacter />
+            {/* <Banner /> */}
           </ErrorBoundary>
         </div>
         <div className="characters">
