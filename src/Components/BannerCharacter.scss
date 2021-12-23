@@ -1,32 +1,67 @@
 @import '../_variables';
 
-.banner--character {
+.banner-character {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  min-height: 17.5rem;
+  color: $dark;
   background-color: $light;
+  box-shadow: 5px 5px 20px transparentize($accent, 0.75);
+  @media (min-width: 800px) {
+    flex-direction: row;
+    width: max-content;
+    max-width: 100%;
+  }
+  @media (min-width: 900px) {
+      width: 100%;
+    }
 
-  & .banner__description {
+  &__description {
+    display: block;
     margin-bottom: 0.8125rem;
     height: 6rem;
   }
-  & .banner__img-wrapper {
+  &__img-wrapper {
     width: 50%;
-    
   }
-  & .banner__img {
-    margin: 1.875rem;
-    margin-right: 0;
-    max-width: 200px;
-    max-height: 200px;
+  &__img {
+    margin: 1rem auto;
+    max-width: 12.5rem;
+    max-height: 12.5rem;
     display: block;
     object-fit: contain;
-  }
-  & .banner__info {
-    width: 50%;
-    margin: 1.875rem;
-    @media (max-width: 600px) {
-      width: auto;
+    @media (min-width: 1000px) {
+      width: 47%;
+      margin: 1.5rem;
     }
   }
-  & .banner__name {
+  &__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem;
+    @media (min-width: 800px) {
+      width: 100%;
+    }
+    @media (min-width: 1000px) {
+      width: 47%;
+      align-items: flex-start;
+    }
+  }
+  &__name {
+    text-transform: uppercase;
+    font-weight: 700;
     margin-bottom: 0.8125rem;
+  }
+  &__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+  &__button {
+    margin-right: 1rem;
+    margin-bottom: 1rem;
   }
 }

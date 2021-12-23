@@ -68,7 +68,12 @@ class CharacterList extends Component {
         </li>
       );
     });
-    return <ul className="character-list">{items}</ul>;
+    return (
+      <>
+        <ul className="character-list">{items}</ul>
+        <Button buttonClasses={'character-list__button button--accent'} buttonName="Load more" />
+      </>
+    );
   }
 
   render() {
@@ -83,7 +88,6 @@ class CharacterList extends Component {
         {errorMessage}
         {spinner}
         {content}
-        <Button buttonClasses={'character-list__button button--accent'} buttonName="Load more" />
       </div>
     );
   }

@@ -1,5 +1,5 @@
 import './ErrorMessage.scss';
-import errorMsgImg from '../Img/error-message.png';
+import errorMsgImg from './ErrorMessage.png';
 
 const ErrorMessage = () => {
   return (

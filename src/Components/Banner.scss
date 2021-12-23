@@ -3,13 +3,50 @@
 .banner {
   display: flex;
   flex-direction: row;
-  width: 45vw;
-  max-width: 37rem;
-  height: 17.5rem;
+  flex-wrap: wrap;
+  width: 100%;
+  color: $light;
+  background-color: $bg;
   box-shadow: 5px 5px 20px transparentize($dark, 0.75);
   @media (max-width: 600px) {
     flex-direction: column;
     width: 100%;
+    height: max-content;
+  }
+
+  & > .col {
+    margin: auto;
+  }
+  &__random {
+    width: 100%;
+    @media (min-width: 700px) {
+      width: 30%;
+    }
+    @media (min-width: 900px) {
+      width: 20%;
+    }
+  }  
+  &__main {
+    width: 100%;
+    order: 1;
+    @media (min-width: 700px) {
+      width: 50%;
+      order: 0;
+    }
+    @media (min-width: 900px) {
+      width: 60%;
+    }
+  }
+  &__try {
+    width: 100%;
+    @media (min-width: 700px) {
+      width: 20%;
+    }
+
+    & .button {
+      margin: auto;
+      margin-bottom: 1rem;
+    }
   }
 
   &__buttons {
@@ -25,25 +62,10 @@
       margin-bottom: 1rem;
     }
   }
-  &__img {
-    width: 50%;
-    @media (max-width: 600px) {
-      width: 11.25rem;
-    }
-  }
-  &__info {
-    display: flex;
-    flex-direction: column;
-    @media (max-width: 600px) {
-      width: auto;
-    }
-  }
-  &__name {
-    text-transform: uppercase;
-    font-weight: 700;
-  }
   &__text {
     font-weight: bold;
     font-size: 1.5rem;
+    text-align: center;
+    padding: 1rem;
   }
 }

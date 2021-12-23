@@ -6,7 +6,7 @@ import './BannerAd.scss';
 const BannerAd = (props) => {
   return (
     <div className="banner banner--ad">
-      <img className="banner__img" src={bannerAddLeftImg} alt="avengers" width={152 + 'px'} height={100 + 'px'} />
+      <img className="banner__img" src={bannerAddLeftImg} alt="avengers" width={152} height={100} />
       <div className="banner__info">
         <h2 className="banner__text">
           New comics every week!
@@ -14,7 +14,7 @@ const BannerAd = (props) => {
           Stay tuned!
         </h2>
       </div>
-      <img className="banner__img" src={bannerAddRightImg} alt="avengers logo" width={133 + 'px'} height={100 + 'px'} />
+      <img className="banner__img" src={bannerAddRightImg} alt="avengers logo" width={133} height={100} />
     </div>
   );
 };

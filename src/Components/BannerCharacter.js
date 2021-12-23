@@ -3,7 +3,6 @@ import { Component } from 'react';
 import MarvelService from '../services/MarvelService';
 import Spinner from './Spinner';
 import ErrorMessage from './ErrorMessage';
-import BannerRandom from './BannerRandom';
 import Button from './Button';
 
 import './BannerCharacter.scss';
@@ -74,18 +73,32 @@ class BannerCharacter extends Component {
     const content = !(loading || error) ? <CharacterView {...character} /> : null;
 
     return (
-      <div className="row">
-        <div className="banner banner--character">
-          {errorMessage}
-          {spinner}
-          {content}
+      <div className="banner">
+        <div className="col banner__random">
+          <p className="banner__text">Random character for today:</p>
+          <p className="banner__text">Do you want to know him better?</p>
         </div>
-        <BannerRandom onClick={this.updateCharacter} />
+        <div className="col banner__main">
+          <div className="banner-character">
+            {errorMessage}
+            {spinner}
+            {content}
+          </div>
+        </div>
+        <div className="col banner__try">
+          <p className="banner__text">Or choose another one</p>
+          <div className="banner__buttons">
+            <Button
+              buttonClasses={'banner__button button--accent button--dark-bg'}
+              buttonName="Try it"
+              onClick={this.updateCharacter}
+            />
+          </div>
+        </div>
       </div>
     );
   }
 }
-
 
 const CharacterView = (character) => {
   let { name, description, thumbnail, homepage, wiki } = character;
@@ -108,13 +121,17 @@ const CharacterView = (character) => {
 
   return (
     <>
-      <img className="banner__img" src={thumbnail} alt={name} width={200} height={200} />
-      <div className="banner__info">
-        <h2 className="banner__name">{name}</h2>
-        <p className="banner__description">{description}</p>
-        <div className="banner__buttons">
-          <Button buttonClasses={'banner__button button--accent'} buttonName="Homepage" buttonUrl={homepage} />
-          <Button buttonClasses={'banner__button'} buttonName="Wiki" buttonUrl={wiki} />
+      <img className="banner-character__img" src={thumbnail} alt={name} width={200} height={200} />
+      <div className="banner-character__info">
+        <h2 className="banner-character__name">{name}</h2>
+        <p className="banner-character__description">{description}</p>
+        <div className="banner-character__buttons">
+          <Button
+            buttonClasses={'banner-character__button button--accent'}
+            buttonName="Homepage"
+            buttonUrl={homepage}
+          />
+          <Button buttonClasses={'banner-character__button'} buttonName="Wiki" buttonUrl={wiki} />
         </div>
       </div>
     </>
