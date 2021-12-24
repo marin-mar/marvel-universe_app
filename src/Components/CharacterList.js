@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React from 'react';
 
 import CharacterCard from './CharacterCard';
 import Button from './Button';
@@ -8,7 +8,7 @@ import ErrorMessage from './ErrorMessage';
 
 import './CharacterList.scss';
 
-class CharacterList extends Component {
+class CharacterList extends React.Component {
   state = {
     charactersList: [],
     loading: true,
@@ -18,6 +18,7 @@ class CharacterList extends Component {
     charactersEnded: false,
   };
   marvelService = new MarvelService();
+  itemRefs = [];
 
   componentDidMount() {
     this.onRequestList();
@@ -57,14 +58,35 @@ class CharacterList extends Component {
     this.marvelService.getAllCharacters(offset).then(this.onCharactersLoaded).catch(this.onError);
   };
 
+  setItemRef = (ref) => {
+    this.itemRefs.push(ref);
+  };
+
+  onFocusItem = (id) => {
+    this.itemRefs.forEach((item) => {
+      item.childNodes[0].classList.remove('active');
+    });
+    this.itemRefs[id].childNodes[0].classList.add('active');
+    this.itemRefs[id].focus();
+  };
+
   renderItems(charactersList) {
-    let items = charactersList.slice(0, this.state.offset).map((item) => {
+    let items = charactersList.slice(0, this.state.offset).map((item, i) => {
       return (
         <li
           className="character-list__item"
           key={item.id}
+          tabIndex={0}
+          ref={this.setItemRef}
           onClick={() => {
             this.props.onSelectedCharacterId(item.id);
+            this.onFocusItem(i);
+          }}
+          onKeyPress={(e) => {
+            if (e.key === ' ' || e.key === 'Enter') {
+              this.props.onSelectedCharacterId(item.id);
+              this.onFocusItem(i);
+            }
           }}>
           <CharacterCard name={item.name} thumbnail={item.thumbnail} />
         </li>
