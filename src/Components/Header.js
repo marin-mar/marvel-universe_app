@@ -1,8 +1,6 @@
 import './Header.scss';
 
 const Header = () => {
-  const menuItemsData = ['Characters', 'Comics'];
-
   return (
     <header className="header">
       <h1 className="header__logo logo">
@@ -10,15 +8,8 @@ const Header = () => {
       </h1>
       <nav className="header__menu menu">
         <ul className="menu__list">
-          {/* {menuItemsData.map((menuItem) => {
-            return (
-              <li key={menuItem} className="menu__item">
-                {menuItem}
-              </li>
-            );
-          })} */}
-          <li className="menu__item active">{menuItemsData[0]}</li>
-          <li className="menu__item">{menuItemsData[1]}</li>
+          <li className="menu__item active">Characters</li>
+          <li className="menu__item">Comics</li>
         </ul>
       </nav>
     </header>
