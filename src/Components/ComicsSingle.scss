@@ -1,0 +1,50 @@
+@import '../_variables';
+
+.comic {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  color: $dark;
+  background-color: $light;
+
+  &__img {
+    object-fit: contain;
+    width: 18.3125rem;
+    height: 28.125rem;
+    margin: auto;
+  }
+  &__info {
+    margin: 0 3.125rem;
+    max-width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  &__back {
+    width: max-content;
+    font-weight: 700;
+    font-size: 1.125rem;
+    margin: 0 auto;
+  }
+
+  &__title {
+    margin-bottom: 1.75rem;
+    font-weight: 700;
+    font-size: 1.375rem;
+    text-transform: uppercase;
+  }
+  &__text,
+  &__pages,
+  &__language {
+    margin-bottom: 2.5rem;
+    font-size: 1.125rem;
+  }
+  &__price {
+    color: $accent;
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+}
