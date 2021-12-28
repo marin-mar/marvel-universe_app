@@ -14,7 +14,7 @@ const CharacterList = (props) => {
   const [offset, setOffset] = useState(0);
   const [charactersEnded, setCharactersEnded] = useState(false);
 
-  const { loading, error, getAllCharacters, getCharacter } = useMarvelService();
+  const { loading, error, getAllCharacters } = useMarvelService();
   const itemRefs = useRef([]);
 
   useEffect(() => {

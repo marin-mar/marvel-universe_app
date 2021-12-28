@@ -21,6 +21,10 @@
   &__main {
     color: $accent;
   }
+  & a {
+    text-decoration: none;
+    color: inherit;
+  }
 }
 
 .menu {
@@ -41,5 +45,9 @@
       color: $dark;
 			margin: 0 0.5rem;
     }
+  }  
+  & a {
+    text-decoration: none;
+    color: inherit;
   }
 }

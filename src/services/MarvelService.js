@@ -1,27 +1,39 @@
 import { useHttp } from '../hooks/http.hook';
 
 const useMarvelService = () => {
-
   const { loading, request, error, clearError } = useHttp();
 
   const apiBase = 'https://gateway.marvel.com:443/v1/public/';
   const apiKey = 'apikey=fdc3403625ab83ef45aae10672f12243';
   // const apiKey = 'apikey=fdc372f12243';
-  let baseCharactersOffset = 0;
+  let baseCharOffset = 0;
+  let baseComicOffset = 0;
   let character = [];
+  let comics = [];
 
-  const getAllCharacters = async (limit = 100, offset = baseCharactersOffset) => {
-    const res = await request(
-      `${apiBase}characters?offset=${offset}&limit=${limit}&${apiKey}`
-    );
+  const getAllCharacters = async (limit = 100, offset = baseCharOffset) => {
+    const res = await request(`${apiBase}characters?offset=${offset}&limit=${limit}&${apiKey}`);
 
     res.data.results.forEach((item) => {
-      baseCharactersOffset++;
+      baseCharOffset++;
       if (item.thumbnail.path !== 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available') {
         character.push(item);
       }
     });
     return character.map(transformCharacter);
+  };
+
+  const getAllComics = async (limit = 100, offset = baseComicOffset) => {
+    const res = await request(
+      `${apiBase}comics?dateDescriptor=thisMonth&orderBy=issueNumber&limit=${limit}&offset=${offset}&${apiKey}`
+    );
+    res.data.results.forEach((item) => {
+      baseComicOffset++;
+      if (item.thumbnail.path !== 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available') {
+        comics.push(item);
+      }
+    });
+    return comics.map(transformComics);
   };
 
   const getCharacter = async (id) => {
@@ -41,7 +53,19 @@ const useMarvelService = () => {
     };
   };
 
-  return { loading, error, getAllCharacters, getCharacter, clearError };
-}
+  const transformComics = (comics) => {
+    return {
+      id: comics.id,
+      title: comics.title,
+      description: comics.description || 'There is no description',
+      pageCount: comics.pageCount ? `${comics.pageCount} p.` : 'No information about the number of pages',
+      thumbnail: comics.thumbnail.path + '.' + comics.thumbnail.extension,
+      language: comics.textObjects.language || 'en-us',
+      price: comics.prices[0].price ? `${comics.prices[0].price}$` : 'not available',
+    };
+  };
+
+  return { loading, error, getAllCharacters, getCharacter, clearError, getAllComics };
+};
 
 export default useMarvelService;

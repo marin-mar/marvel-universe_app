@@ -1,64 +1,24 @@
-import { useState } from 'react';
-import Header from '../Components/Header';
-import Banner from '../Components/Banner';
-import CharacterList from '../Components/CharacterList';
-import CharacterDescription from '../Components/CharacterDescription';
-import ErrorBoundary from '../Components/ErrorBoundary';
-import CharacterSearch from '../Components/CharacterSearch';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import Comics from '../Components/Comics';
-import ComicsSingle from '../Components/ComicsSingle';
-import Character from '../Components/Character';
+import Header from '../Components/Header';
+import { MainPage, ComicsPage, ComicsSinglePage, CharacterSinglePage, Page404 } from '../Pages';
 
 import './App.scss';
 
 const App = () => {
-  const [selectedCharacterId, setSelectedCharacterId] = useState(null);
-
-  const onSelectedCharacterId = (id) => {
-    setSelectedCharacterId((selectedCharacterId) => id);
-  };
-
   return (
-    <div className="app">
-      <Header />
-      <div className="page__characters">
-        <div className="banners">
-          <ErrorBoundary>
-            <Banner bannerCharacter />
-          </ErrorBoundary>
-        </div>
-        <div className="characters">
-          <ErrorBoundary>
-            <CharacterList onSelectedCharacterId={onSelectedCharacterId} />
-          </ErrorBoundary>
-          <div className="description">
-            <ErrorBoundary>
-              <CharacterDescription selectedCharacterId={selectedCharacterId} />
-              <CharacterSearch />
-            </ErrorBoundary>
-          </div>
-        </div>
+    <Router>
+      <div className="app">
+        <Header />
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/comics" element={<ComicsPage />} />
+          <Route path="/comics-single" element={<ComicsSinglePage />} />
+          <Route path="/character-single" element={<CharacterSinglePage />} />
+          <Route path="*" element={<Page404 />} />
+        </Routes>
       </div>
-
-      {/* <div className="page__comics">
-        <div className="banners">
-          <ErrorBoundary>
-            <Banner />
-          </ErrorBoundary>
-        </div>
-        <ErrorBoundary>
-          <Comics />
-        </ErrorBoundary>
-        <ErrorBoundary>
-          <ComicsSingle />
-        </ErrorBoundary>
-        <ErrorBoundary>
-          <Character />
-        </ErrorBoundary>
-      </div> */}
-
-    </div>
+    </Router>
   );
 };
 
