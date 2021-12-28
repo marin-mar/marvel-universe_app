@@ -39,6 +39,10 @@
       }
     }
   }
+  & a {
+    text-decoration: none;
+    color: inherit;
+  }
   &__img {
     object-fit: cover;
     max-width: 100%;

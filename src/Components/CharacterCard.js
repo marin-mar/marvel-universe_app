@@ -1,5 +1,3 @@
-import characterCardImg from '../Img/character_card.png';
-
 import './CharacterCard.scss';
 
 const CharacterCard = (props) => {
@@ -9,14 +7,6 @@ const CharacterCard = (props) => {
     cardClass += ' character-card';
   } else {
     cardClass = 'character-card';
-  }
-
-  if (!name) {
-    name = 'Character';
-  }
-
-  if (!thumbnail) {
-    thumbnail = { characterCardImg };
   }
 
   return (

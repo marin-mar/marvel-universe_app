@@ -39,6 +39,7 @@ const CharacterDescription = (props) => {
     updateCharacter();
   }, [props.selectedCharacterId]);
 
+
   const skeleton = character || loading || error ? null : <Skeleton />;
   const errorMessage = error ? <ErrorMessage /> : null;
   const spinner = loading ? <Spinner /> : null;
@@ -55,23 +56,11 @@ const CharacterDescription = (props) => {
 };
 
 const CharacterView = ({ character }) => {
-  let { name, description, thumbnail, homepage, wiki, comics } = character;
+  let { id, name, description, thumbnail, homepage, wiki, comics } = character;
   comics = comics.length > 9 ? comics.slice(0, 10) : comics;
-
-  if (!name) {
-    name = 'There is no name yet';
-  }
-
-  if (!description) {
-    description = 'There is no description yet';
-  }
 
   if (description.length > 200) {
     description = description.slice(0, 200) + '...';
-  }
-
-  if (!thumbnail) {
-    thumbnail = 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg';
   }
 
   return (

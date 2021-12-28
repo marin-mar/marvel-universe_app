@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import Button from './Button';
 import useMarvelService from '../services/MarvelService';
@@ -61,9 +62,11 @@ const Comics = (props) => {
               onFocusItem(i);
             }
           }}>
-          <img className="comics__img" src={item.thumbnail} alt={item.title} width={225} height={346} />
-          <h3 className="comics__title">{item.title}</h3>
-          <p className="comics__price">{item.price}</p>
+          <Link to={`/comics/${item.id}`}>
+            <img className="comics__img" src={item.thumbnail} alt={item.title} width={225} height={346} />
+            <h3 className="comics__title">{item.title}</h3>
+            <p className="comics__price">{item.price}</p>
+          </Link>
         </li>
       );
     });

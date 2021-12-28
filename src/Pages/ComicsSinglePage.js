@@ -1,20 +1,43 @@
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+
+import useMarvelService from '../services/MarvelService';
 import ErrorBoundary from '../Components/ErrorBoundary';
-import Banner from '../Components/Banner';
 import ComicsSingle from '../Components/ComicsSingle';
+import ErrorMessage from '../Components/ErrorMessage';
+import Spinner from '../Components/Spinner';
 
 const ComicsSinglePage = () => {
-	return (
+  const { comicId } = useParams();
+  const [comic, setComic] = useState(null);
+  const { loading, error, clearError, getComic } = useMarvelService();
+
+  useEffect(() => {
+    updateComic();
+  }, [comicId]);
+
+  const updateComic = () => {
+    clearError();
+    getComic(comicId).then(onComicLoaded);
+  };
+
+  const onComicLoaded = (comic) => {
+    setComic(comic);
+  };
+
+  const errorMessage = error ? <ErrorMessage /> : null;
+  const spinner = loading ? <Spinner /> : null;
+  const content = !(loading || error || !comic) ? <ComicsSingle comic={comic} /> : null;
+
+  return (
     <>
-      <div className="banners">
-        <ErrorBoundary>
-          <Banner />
-        </ErrorBoundary>
-      </div>
       <ErrorBoundary>
-        <ComicsSingle />
+        {errorMessage}
+        {spinner}
+        {content}
       </ErrorBoundary>
     </>
   );
-}
+};
 
 export default ComicsSinglePage;
