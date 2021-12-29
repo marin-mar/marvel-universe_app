@@ -1,7 +1,7 @@
 import './Button.scss';
 
 const Button = (props) => {
-  const { buttonClasses, buttonName, buttonUrl, onClick, disabled, style } = props;
+  const { buttonClasses, buttonName, buttonUrl, onClick, disabled, style, type } = props;
 
   if (buttonUrl) {
     return (
@@ -17,7 +17,7 @@ const Button = (props) => {
     );
   } else {
     return (
-      <button type="button" className={'button ' + buttonClasses} onClick={onClick} disabled={disabled} style={style}>
+      <button type={type ? type : "button"} className={'button ' + buttonClasses} onClick={onClick} disabled={disabled} style={style}>
         {buttonName}
       </button>
     );

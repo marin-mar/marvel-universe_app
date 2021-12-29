@@ -3,7 +3,6 @@ import Banner from '../Components/Banner';
 import Comics from '../Components/Comics';
 
 const ComicsPage = () => {
-
   return (
     <>
       <div className="banners">

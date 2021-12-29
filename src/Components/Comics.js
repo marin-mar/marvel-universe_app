@@ -37,7 +37,6 @@ const Comics = (props) => {
     setComicsEnded((comicsEnded) => ended);
   };
 
-
   const onFocusItem = (id) => {
     itemRefs.current.forEach((item) => {
       item.classList.remove('active');
@@ -78,16 +77,16 @@ const Comics = (props) => {
     );
   };
 
-  const items = renderItems(comicsList);
+  const content = renderItems(comicsList);
   const errorMessage = error ? <ErrorMessage /> : null;
-  const spinner = loading && !newItemLoading ? <Spinner /> : null;
+  const spinner = loading ? <Spinner /> : null;
 
   return (
     <div className="comics">
-      {items}
+      {content}
       {errorMessage}
       {spinner}
-      {!items ? null : (
+      {content ? (
         <Button
           buttonClasses={'comics__button button--accent'}
           buttonName="Load more"
@@ -95,7 +94,7 @@ const Comics = (props) => {
           style={{ display: comicsEnded ? 'none' : 'block' }}
           onClick={onRequestList}
         />
-      )}
+      ) : null}
     </div>
   );
 };
