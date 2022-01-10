@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 import useMarvelService from '../services/MarvelService';
 import ErrorBoundary from '../Components/ErrorBoundary';
@@ -13,7 +15,6 @@ const SinglePage = ({ Component, dataType }) => {
 
   useEffect(() => {
     updateData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const updateData = () => {
@@ -39,6 +40,10 @@ const SinglePage = ({ Component, dataType }) => {
 
   return (
     <>
+      <Helmet>
+        <title>{data ? data.title || data.name : 'Marvel Single Page'}</title>
+        <meta name="description" content={data ? data.description : 'Marvel Single Page'} />
+      </Helmet>
       <ErrorBoundary>
         {errorMessage}
         {spinner}

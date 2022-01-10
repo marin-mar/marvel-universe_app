@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useEffect } from 'react';
 
 import Button from './Button';
 import Spinner from './Spinner';
@@ -56,7 +57,7 @@ const CharacterDescription = (props) => {
 };
 
 const CharacterView = ({ character }) => {
-  let { id, name, description, thumbnail, homepage, wiki, comics } = character;
+  let { name, description, thumbnail, homepage, wiki, comics } = character;
   comics = comics.length > 9 ? comics.slice(0, 10) : comics;
 
   if (description.length > 200) {

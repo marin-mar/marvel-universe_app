@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Helmet } from 'react-helmet';
 
 import ErrorBoundary from '../Components/ErrorBoundary';
 import Banner from '../Components/Banner';
@@ -15,6 +16,10 @@ const MainPage = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Marvel Universe inform portal | MainPage</title>
+        <meta name="description" content="Marvel Universe inform portal | MainPage" />
+      </Helmet>
       <div className="banners">
         <ErrorBoundary>
           <Banner bannerCharacter />
