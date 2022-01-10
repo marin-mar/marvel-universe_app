@@ -13,10 +13,14 @@ const Header = () => {
       <nav className="header__menu menu">
         <ul className="menu__list">
           <li className="menu__item active">
-            <NavLink end style={({isActive}) => ({color: isActive ? '#9f0013' : '#1c1c1c'})} to="/">Characters</NavLink>
+            <NavLink style={({ isActive }) => ({ color: isActive ? '#9f0013' : '#1c1c1c' })} to="/">
+              Characters
+            </NavLink>
           </li>
           <li className="menu__item">
-            <NavLink style={({isActive}) => ({color: isActive ? '#9f0013' : '#1c1c1c'})} to="/comics">Comics</NavLink>
+            <NavLink style={({ isActive }) => ({ color: isActive ? '#9f0013' : '#1c1c1c' })} to="/comics">
+              Comics
+            </NavLink>
           </li>
         </ul>
       </nav>

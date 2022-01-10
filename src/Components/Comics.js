@@ -19,6 +19,7 @@ const Comics = (props) => {
 
   useEffect(() => {
     onRequestList();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onRequestList = (initial) => {

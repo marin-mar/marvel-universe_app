@@ -11,11 +11,11 @@ import Spinner from './Spinner';
 import './CharacterSearch.scss';
 
 const CharacterSearch = () => {
-  const [charName, setCharName] = useState(null);
+  const [char, setChar] = useState(null);
   const { loading, error, getCharacterByName, clearError } = useMarvelService();
 
-  const onCharLoaded = (charName) => {
-    setCharName(charName);
+  const onCharLoaded = (char) => {
+    setChar(char);
   };
 
   const onUpdateChar = (charName) => {
@@ -25,16 +25,16 @@ const CharacterSearch = () => {
 
   const errorMessage = error ? <ErrorMessage /> : null;
   const spinner = loading ? <Spinner /> : null;
-  const result = !charName ? null : charName.length > 0 ? (
+  const result = !char ? null : char.length > 0 ? (
     <div className="search__message--success">
-      <h3 className="search__text">`There is! Visit ${charName[0].name} page?`</h3>
-      <Link to={`/characters/${charName[0].id}`}>
+      <h3 className="search__text">There is! Visit {char[0].name} page?</h3>
+      <Link to={`/characters/${char[0].id}`}>
         <Button buttonClasses={'search__button button--medium'} buttonName="To page" />
       </Link>
     </div>
   ) : (
-    <div className="search__message--required">
-      <h3 className="search__text">This field is required</h3>
+    <div className="search__message--error">
+      <h3 className="search__text">The character was not found. Check the name and try again</h3>
     </div>
   );
   return (
@@ -55,7 +55,7 @@ const CharacterSearch = () => {
           <FormikErrorMessage name="charName">
             {(msg) => (
               <div className="search__message--error">
-                <h3 className="search__text">The character was not found. Check the name and try again</h3>
+                <h3 className="search__text">{msg}</h3>
               </div>
             )}
           </FormikErrorMessage>
