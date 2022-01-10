@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 import ErrorBoundary from '../Components/ErrorBoundary';
 import Banner from '../Components/Banner';
@@ -6,7 +6,7 @@ import Comics from '../Components/Comics';
 
 const ComicsPage = () => {
   return (
-    <>
+    <HelmetProvider>
       <Helmet>
         <title>Marvel Universe | ComicsPage</title>
         <meta name="description" content="Marvel Universe inform portal | ComicsPage" />
@@ -19,7 +19,7 @@ const ComicsPage = () => {
       <ErrorBoundary>
         <Comics />
       </ErrorBoundary>
-    </>
+    </HelmetProvider>
   );
 };
 

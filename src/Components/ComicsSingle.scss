@@ -30,6 +30,12 @@
     margin: 0 auto;
     padding: 0.5rem;
     border: 1px solid $accent;
+    
+    &:hover {
+      color: $light;
+      background-color: $medium;
+      border-color: $light;
+    }
   }
 
   &__title {

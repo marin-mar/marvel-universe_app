@@ -2,18 +2,16 @@
 import { useState, useEffect } from 'react';
 
 import Button from './Button';
-import Spinner from './Spinner';
-import ErrorMessage from './ErrorMessage';
-import Skeleton from './Skeleton';
 import useMarvelService from '../services/MarvelService';
 import usePrevious from '../hooks/usePrevious.hook';
+import setContent from '../utils/setContent';
 
 import './CharacterDescription.scss';
 
 const CharacterDescription = (props) => {
   const [character, setCharacter] = useState(null);
 
-  const { loading, error, getCharacter, clearError } = useMarvelService();
+  const { getCharacter, clearError, process, setProcess } = useMarvelService();
 
   const onCharacterLoaded = (character) => {
     setCharacter(character);
@@ -24,7 +22,7 @@ const CharacterDescription = (props) => {
       return;
     }
     clearError();
-    getCharacter(props.selectedCharacterId).then(onCharacterLoaded);
+    getCharacter(props.selectedCharacterId).then(onCharacterLoaded).then(() => {setProcess('confirmed');});
   };
 
   useEffect(() => {
@@ -40,25 +38,16 @@ const CharacterDescription = (props) => {
     updateCharacter();
   }, [props.selectedCharacterId]);
 
-
-  const skeleton = character || loading || error ? null : <Skeleton />;
-  const errorMessage = error ? <ErrorMessage /> : null;
-  const spinner = loading ? <Spinner /> : null;
-  const content = !(loading || error || !character) ? <CharacterView character={character} /> : null;
-
   return (
     <div className="character-description">
-      {skeleton}
-      {errorMessage}
-      {spinner}
-      {content}
+      {setContent(process, CharacterView, character)}
     </div>
   );
 };
 
-const CharacterView = ({ character }) => {
-  let { name, description, thumbnail, homepage, wiki, comics } = character;
-  comics = comics.length > 9 ? comics.slice(0, 10) : comics;
+const CharacterView = ({ data }) => {
+  let { name, description, thumbnail, homepage, wiki, comics } = data;
+  comics = comics.length > 5 ? comics.slice(0, 5) : comics;
 
   if (description.length > 200) {
     description = description.slice(0, 200) + '...';

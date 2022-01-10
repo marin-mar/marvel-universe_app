@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Helmet } from 'react-helmet';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 import ErrorBoundary from '../Components/ErrorBoundary';
 import Banner from '../Components/Banner';
@@ -15,7 +15,7 @@ const MainPage = () => {
   };
 
   return (
-    <>
+    <HelmetProvider>
       <Helmet>
         <title>Marvel Universe inform portal | MainPage</title>
         <meta name="description" content="Marvel Universe inform portal | MainPage" />
@@ -36,7 +36,7 @@ const MainPage = () => {
           </ErrorBoundary>
         </div>
       </div>
-    </>
+    </HelmetProvider>
   );
 };
 

@@ -13,12 +13,16 @@
 
   & > .row {
     margin: auto;
+    @media (min-width: 890px) {
+      flex-wrap: nowrap;
+    }
   }
 
   &__img {
-    margin-right: 1.5625rem;
-    margin-bottom: 0.9375rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
     object-fit: cover;
+    max-width: 12.5rem;
     @media (max-width: 600px) {
       width: 11.25rem;
     }
